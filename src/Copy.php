@@ -104,5 +104,36 @@
         {
             $GLOBALS['DB']->exec("INSERT INTO copies (book_id) VALLUES ({$copy->getId()});");
         }
+
+        function getCopies()
+        {
+            $returned_copies = $GLOBALS['DB']->query("SELECT copies.* ")
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
+
  ?>
