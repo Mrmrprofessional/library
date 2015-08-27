@@ -1,21 +1,21 @@
 <?php
     class Patron
     {
-        private $patron;
+        private $patron_name;
         private $id;
 
-        function __construct($patron, $id = null)
+        function __construct($patron_name, $id = null)
         {
-            $this->patron = $patron;
+            $this->patron_name = $patron_name;
             $this->id = $id;
         }
         function setpatron($new_patron)
         {
-            $this->patron = $new_patron;
+            $this->patron_name = $new_patron;
         }
         function getpatron()
         {
-            return $this->patron;
+            return $this->patron_name;
         }
 
         function getId()
@@ -25,7 +25,7 @@
 
         function save()
         {
-            $GLOBALS['DB']->exec("INSERT INTO patrons (patron)
+            $GLOBALS['DB']->exec("INSERT INTO patrons (patron_name)
             VALUES ('{$this->getpatron()}');");
             $this->id = $GLOBALS['DB']->lastInsertID();
         }
@@ -35,10 +35,10 @@
             $returned_patrons = $GLOBALS['DB']->query("SELECT * FROM patrons;");
             var_dump($returned_patrons);
             $patrons = array();
-            foreach($returned_patrons as $patron) {
-                $patron = $patron['patron'];
-                $id = $patron['id'];
-                $new_patron = new Patron($patron, $id);
+            foreach($returned_patrons as $patron_name) {
+                $patron_name = $patron_name['patron_name'];
+                $id = $patron_name['id'];
+                $new_patron = new Patron($patron_name, $id);
                 array_push($patrons, $new_patron);
             }
             return $patrons;
@@ -53,10 +53,10 @@
         {
             $found_patron = null;
             $patrons = Patron::getAll();
-            foreach($patrons as $patron) {
-                $patron_id = $patron->getId();
+            foreach($patrons as $patron_name) {
+                $patron_id = $patron_name->getId();
                 if ($patron_id == $search_id) {
-                    $found_patron = $patron;
+                    $found_patron = $patron_name;
                 }
             }
             return $found_patron;
@@ -98,10 +98,10 @@
             $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE author_id = {$this->id}");
         }
 
-        //Update patron
+        //Update patron_name
         function updatepatron($new_patron)
         {
-            $GLOBALS['DB']->exec("UPDATE authors SET patron = '{$new_patron}'
+            $GLOBALS['DB']->exec("UPDATE authors SET patron_name = '{$new_patron}'
                 WHERE id = {$this->getId()}");
             $this->setpatron($new_patron);
         }

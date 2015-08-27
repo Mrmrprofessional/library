@@ -68,10 +68,11 @@
 
         function getBooks()
         {
-            $returned_books = $GLOBALS['DB']->query("SELECT books.* FROM
-                books JOIN authors_books ON (books.id = authors_books.book_id)
-                JOIN authors ON (authors.id = authors_books.author_id)
-                WHERE authors.id = {$this->getId()}");
+            $returned_books = $GLOBALS['DB']->query("SELECT books.* FROM authors
+                JOIN authors_books ON (authors.id = authors_books.author_id)
+                JOIN books ON (authors_books.bookid = books.id)
+                WHERE authors.id = {$this->getId()};");
+
             $books = array();
             foreach($returned_books as $book)
             {

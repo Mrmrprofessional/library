@@ -1,0 +1,3 @@
+SELECT authors.* FROM books JOIN authors_books ON (books.id = authors_books.book_id)
+    JOIN authors ON (authors.id = authors_books.author_id)
+    WHERE authors.id = 5;

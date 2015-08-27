@@ -23,20 +23,20 @@
         function test_getPatron()
         {
             //Arrange
-            $patron = "Stephen King";
+            $patron_name = "Stephen King";
             $id = null;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             //Act
             $result = $test_patron->getpatron();
             //Assert
-            $this->assertEquals($patron, $result);
+            $this->assertEquals($patron_name, $result);
         }
         function test_setPatron()
         {
             //Arrange
-            $patron = "Stephen King";
+            $patron_name = "Stephen King";
             $id = null;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             //Act
             $test_patron->setPatron("James Patterson");
             $result = $test_patron->getPatron();
@@ -47,9 +47,9 @@
         function test_getId()
         {
            //Arrange
-           $patron = "Biology";
+           $patron_name = "Biology";
            $id = 1;
-           $test_patron = new Patron($patron, $id);
+           $test_patron = new Patron($patron_name, $id);
            //Act
            $result = $test_patron->getId();
            //Assert
@@ -58,9 +58,9 @@
         function test_save()
         {
             //Arrange
-            $patron = "Stephen King";
+            $patron_name = "Stephen King";
             $id = 1;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             $test_patron->save();
             //Act
             $result = Patron::getAll();
@@ -70,13 +70,13 @@
         function test_getAll()
         {
             //Arrange
-            $patron = "Stephen King";
+            $patron_name = "Stephen King";
             $id = 1;
-            $patron2 = "James Patterson";
+            $patron_name2 = "James Patterson";
             $id2 = 2;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             $test_patron->save();
-            $test_course2 = new Patron($patron2, $id2);
+            $test_course2 = new Patron($patron_name2, $id2);
             $test_course2->save();
             //Act
             $result = Patron::getAll();
@@ -87,13 +87,13 @@
         function test_deleteAll()
         {
             //Arrange
-            $patron = "James Patterson";
+            $patron_name = "James Patterson";
             $id = 1;
-            $patron2 = "Stephen King";
+            $patron_name2 = "Stephen King";
             $id2 = 2;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             $test_patron->save();
-            $test_course2 = new Patron($patron2, 2, $id2);
+            $test_course2 = new Patron($patron_name2, 2, $id2);
             $test_course2->save();
             //Act
             Patron::deleteAll();
@@ -104,13 +104,13 @@
         function test_find()
         {
             //Arrange
-            $patron = "James Patterson";
+            $patron_name = "James Patterson";
             $id = 1;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             $test_patron->save();
-            $patron2 = "Albebra";
+            $patron_name2 = "Albebra";
             $id = 2;
-            $test_patron2 = new Patron($patron2, $id);
+            $test_patron2 = new Patron($patron_name2, $id);
             $test_patron2->save();
             //Act
             $result = Patron::find($test_patron->getId());
@@ -120,9 +120,9 @@
         function test_getCheckouts()
         {
             //Arrange
-            $patron = "Wesley Pong";
+            $patron_name = "Wesley Pong";
             $id = 1;
-            $test_patron = new Patron($patron, $id);
+            $test_patron = new Patron($patron_name, $id);
             $test_book->save();
 
             $title = "Billy Bodega";
