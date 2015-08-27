@@ -161,9 +161,6 @@
 
 
 
-
-
-
         function test_getAuthors()
         {
             //Arrange
@@ -172,18 +169,18 @@
             $test_book->save();
 
             $name = "Jeff";
-            $id = 1;
+
             $test_author = new Author($name);
             $test_author->save();
 
             $name2 = "Fred";
-            $id = 2;
+
             $test_author2 = new Author($name2);
             $test_author2->save();
 
             //Act
-            $test_book->addAuthor($test_author->getId());
-            $test_book->addAuthor($test_author2->getId());
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
             $result = $test_book->getAuthors();
 
             //Assert
