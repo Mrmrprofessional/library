@@ -53,6 +53,7 @@
            //Assert
            $this->assertEquals(1, $result);
         }
+
         function test_save()
         {
             //Arrange
@@ -117,23 +118,24 @@
         function test_getBooks()
         {
             //Arrange
-            $title = "Wesley Pong";
+            $name = "James Patterson";
             $id = 1;
-            $test_book = new Book($title, $id);
+            $test_author = new Author($name, $id);
+            $test_author->save();
+
+            $title = "Sea Wolf";
+            $id2 = 2;
+            $test_book = new Book($title, $id2);
             $test_book->save();
 
-            $title2 = "Billy Bodega";
-            $id2 = 1;
-            $test_book2 = new Book($title2, $id2);
+            $title2 = "Eye of the world";
+            $id3 = 3;
+            $test_book2 = new Book($title2, $id3);
             $test_book2->save();
 
-            $name = "James Patterson";
-            $id3 = 2;
-            $test_author = new Author($name, $id3);
-            $test_author->save();
             //Act
-            $test_author->addBook($test_book->getId());
-            $test_author->addBook($test_book2->getId());
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
             //Assert
             $this->assertEquals($test_author->getBooks(), [$test_book, $test_book2]);
         }
@@ -166,22 +168,22 @@
         function test_deleteAllBooks()
         {
             //Arrange
-            $name = "Wesley Pong";
-            $id = 1;
-            $test_author = new Author($name, $id);
+            $name = "Benjamin";
+            // $id = 1;
+            $test_author = new Author($name);
             $test_author->save();
 
-            $title = "Billy Bodega";
-            $id2 = 1;
-            $test_book = new Book($title, $id2);
+            $title = "Book Title";
+            // $id2 = 1;
+            $test_book = new Book($title);
             $test_book->save();
 
-            $title = "James Patterson";
-            $id3 = 2;
-            $test_book2 = new Book($title, $id3);
+            $title = "Book Title2";
+            // $id3 = 2;
+            $test_book2 = new Book($title);
             $test_book2->save();
-            $test_author->addBook($test_book->getId());
-            $test_author->addBook($test_book2->getId());
+            $test_author->addBook($test_book);
+            $test_author->addBook($test_book2);
             //Act
             $test_author->deleteAllBooks();
             $result = $test_author->getBooks();

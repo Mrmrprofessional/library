@@ -3,15 +3,18 @@
     {
         private $title;
         private $id;
+
         function __construct($title, $id = null)
         {
             $this->title = $title;
             $this->id = $id;
         }
+
         function setTitle($new_title)
         {
             $this->title =  $new_title;
         }
+
         function getTitle()
         {
             return $this->title;
@@ -60,18 +63,19 @@
             return $found_book;
         }
 
-        function addAuthor($author_id)
+        function addAuthor($author)
         {
             $GLOBALS['DB']->exec("INSERT INTO authors_books (author_id, book_id)
-                VALUES ({$author_id}, {$this->id})");
+                VALUES ({$author->getId()}, {$this->getId()});");
         }
 
         function getAuthors()
         {
-            $returned_authors = $GLOBALS['DB']->query("SELECT authors.* FROM
-                authors JOIN authors_books ON (authors.id = authors_books.author_id)
-                JOIN books ON (books.id = authors_books.book_id)
-                WHERE books.id = {$this->getId()}");
+            $returned_authors = $GLOBALS['DB']->query("SELECT authors.* FROM books
+                JOIN authors_books ON (books.id = authors_books.book_id)
+                JOIN authors ON (authors_books.author_id = authors.id)
+                WHERE books.id = {$this->getId()};");
+
             $authors = array();
             foreach($returned_authors as $author)
             {
@@ -82,11 +86,11 @@
             }
             return $authors;
         }
-
+        //
         // function deleteAuthor($book_id)
         // {
         //     $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE
-        //         book_id = {$book_id} AND author_id = {$this->id}");
+        //         book_id = {$this->getId()} AND author_id = {$author->id};");
         // }
 
         function deleteAllAuthors()
@@ -98,7 +102,7 @@
         function updateTitle($new_title)
         {
             $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}'
-                WHERE id = {$this->getId()}");
+                WHERE id = {$this->getId()};");
             $this->setTitle($new_title);
         }
 
