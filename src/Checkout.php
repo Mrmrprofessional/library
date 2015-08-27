@@ -70,6 +70,12 @@
             }
             return $checkouts;
         }
+
+        static function deleteAll()
+        {
+            $GLOBALS ['DB']->exec("DELETE FROM checkouts;");
+        }
+
     }
 
 
