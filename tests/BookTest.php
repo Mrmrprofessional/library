@@ -190,60 +190,56 @@
         // function test_deleteAuthor()
         // {
         //     //Arrange
-        //     $title = "Wesley Pong";
-        //     $id = 1;
-        //     $test_book = new Book($title, $id);
+        //     $title = "Book Title";
+        //     $test_book = new Book($title);
         //     $test_book->save();
         //
-        //     $name = "History";
-        //     $id2 = 2;
-        //     $test_author = new Author($name, $id2);
+        //     $name = "George";
+        //     $test_author = new Author($name);
         //     $test_author->save();
         //
-        //     $name2 = "Lit";
-        //     $id3 = 3;
-        //     $test_author2 = new Author($name2, $id3);
+        //     $name2 = "Susan";
+        //     $test_author2 = new Author($name2);
         //     $test_author2->save();
         //
-        //     $test_book->addAuthor($test_author->getId());
-        //     $test_book->addAuthor($test_author2->getId());
+        //     // $test_book->addAuthor($test_author);
+        //     // $test_book->addAuthor($test_author2);
         //     //Act
-        //
-        //     $test_book->deleteAuthor($test_author->getId());
+        //     $test_book->deleteAuthor($test_author);
         //     $result = $test_book->getAuthors();
-        //
+        //     var_dump($result);
         //     //Assert
         //     $this->assertEquals([$test_author2], $result);
         // }
 
-        // function test_deleteAllAuthors()
-        // {
-        //     //Arrange
-        //     $title = "Wesley Pong";
-        //     $id = 1;
-        //     $test_book = new Book($title, $id);
-        //     $test_book->save();
-        //
-        //     $name = "History";
-        //     $id2 = 2;
-        //     $test_author = new Author($name, $id2);
-        //     $test_author->save();
-        //
-        //     $name2 = "Lit";
-        //     $id3 = 3;
-        //     $test_author2 = new Author($name2, $id3);
-        //     $test_author2->save();
-        //
-        //     $test_book->addAuthor($test_author->getId());
-        //     $test_book->addAuthor($test_author2->getId());
-        //
-        //     //Act
-        //     $test_book->deleteAllAuthors();
-        //     $result = $test_book->getAuthors();
-        //
-        //     //Assert
-        //     $this->assertEquals([], $result);
-        // }
+        function test_deleteAllAuthors()
+        {
+            //Arrange
+            $title = "Wesley Pong";
+
+            $test_book = new Book($title);
+            $test_book->save();
+
+            $name = "History";
+
+            $test_author = new Author($name);
+            $test_author->save();
+
+            $name2 = "Lit";
+
+            $test_author2 = new Author($name2);
+            $test_author2->save();
+
+            $test_book->addAuthor($test_author);
+            $test_book->addAuthor($test_author2);
+
+            //Act
+            $test_book->deleteAllAuthors();
+            $result = $test_book->getAuthors();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
 
         function testUpdateTitle()
         {

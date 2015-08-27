@@ -3,15 +3,18 @@
     {
         private $title;
         private $id;
+
         function __construct($title, $id = null)
         {
             $this->title = $title;
             $this->id = $id;
         }
+
         function setTitle($new_title)
         {
             $this->title =  $new_title;
         }
+        
         function getTitle()
         {
             return $this->title;
@@ -83,11 +86,11 @@
             }
             return $authors;
         }
-
+        //
         // function deleteAuthor($book_id)
         // {
         //     $GLOBALS['DB']->exec("DELETE FROM authors_books WHERE
-        //         book_id = {$book_id} AND author_id = {$this->id}");
+        //         book_id = {$this->getId()} AND author_id = {$author->id};");
         // }
 
         function deleteAllAuthors()
