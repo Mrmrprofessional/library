@@ -29,10 +29,6 @@
             $this->patron_id = $new_patron_id;
         }
 
-        function setId($new_id)
-        {
-            $this->id = $new_id;
-        }
 
         function getDueDate()
         {
@@ -47,6 +43,11 @@
         function getPatronId()
         {
             return $this->patron_id;
+        }
+
+        function getId()
+        {
+            return $this->id;
         }
 
         function save()
@@ -74,6 +75,24 @@
         static function deleteAll()
         {
             $GLOBALS ['DB']->exec("DELETE FROM checkouts;");
+        }
+
+        static function findDueDate($search_id)
+        {
+            $found_checkout = null;
+            $checkouts = Checkout::getAll();
+            foreach($checkouts as $checkout) {
+                $checkout_id = $checkout->getId();
+                if ($checkout_id == $search_id) {
+                    $found_checkout = $checkout;
+                }
+            }
+            return $found_checkout;
+        }
+
+        function updateDueDate($new_date)
+        {
+            $GLOBALS['DB']->exec("UPDATE checkouts SET due_date = '{$new_date}' WHERE id = {$this->getID()};");
         }
 
     }

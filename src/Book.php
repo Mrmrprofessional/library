@@ -14,7 +14,7 @@
         {
             $this->title =  $new_title;
         }
-        
+
         function getTitle()
         {
             return $this->title;
@@ -102,7 +102,7 @@
         function updateTitle($new_title)
         {
             $GLOBALS['DB']->exec("UPDATE books SET title = '{$new_title}'
-                WHERE id = {$this->getId()}");
+                WHERE id = {$this->getId()};");
             $this->setTitle($new_title);
         }
 
